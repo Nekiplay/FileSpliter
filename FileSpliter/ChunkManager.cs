@@ -26,6 +26,7 @@ namespace FileSpliter
             }
             return HexUtils.ParseHex(hex);
         }
+        
         public byte[] GetHex(Chunk[] chunks)
         {
             return GetHex(chunks.ToList());

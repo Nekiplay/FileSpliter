@@ -25,8 +25,7 @@ namespace FileSpliter
 
             for (int i = 0; i < ret.Length; i++)
             {
-                ret[i] = (byte)((ParseNybble(hex[offset]) << 4)
-                                 | ParseNybble(hex[offset + 1]));
+                ret[i] = (byte)((ParseNybble(hex[offset]) << 4) | ParseNybble(hex[offset + 1]));
                 offset += 2;
             }
             return ret;
@@ -68,12 +67,19 @@ namespace FileSpliter
             return output.ToArray();
         }
 
-        public static IEnumerable<string> Split(string text, int size)
+        public static IEnumerable<string> Split(TextReader sr, int size, bool fixedSize = false)
         {
-            for (var i = 0; i < text.Length; i += size)
+            while (sr.Peek() >= 0)
             {
-                yield return text.Substring(i, Math.Min(size, text.Length - i));
+                var buffer = new char[size];
+                var c = sr.ReadBlock(buffer, 0, size);
+                yield return fixedSize ? new String(buffer) : new String(buffer, 0, c);
             }
+        }
+        public static IEnumerable<string> Split(string s, int size, bool fixedSize = false)
+        {
+            var sr = new StringReader(s);
+            return Split(sr, size, fixedSize);
         }
     }
 }

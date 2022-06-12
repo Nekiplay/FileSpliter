@@ -47,7 +47,6 @@ namespace Tests
                         File.WriteAllText(chunkFileName, chunk.ToJson());
                     }
                     Console.WriteLine("Success " + file.Name + " splited");
-                    Console.ReadKey();
                 }
                 else
                 {

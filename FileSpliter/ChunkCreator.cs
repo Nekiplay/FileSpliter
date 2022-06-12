@@ -41,11 +41,11 @@ namespace FileSpliter
                 needFiles = str.Length;
             }
             List<string> hexSplited = HexUtils.Split(str, str.Length / needFiles).ToList();
-            if (hexSplited.Count > needFiles)
-            {
-                needFiles = needFiles - (hexSplited.Count - needFiles);
-                hexSplited = HexUtils.Split(str, str.Length / needFiles).ToList();
-            }
+            //if (hexSplited.Count > needFiles)
+            //{
+            //    needFiles = needFiles - (hexSplited.Count - needFiles);
+            //    hexSplited = HexUtils.Split(str, str.Length / needFiles).ToList();
+            //}
             return hexSplited;
         }
     }
