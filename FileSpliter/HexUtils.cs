@@ -31,7 +31,7 @@ namespace FileSpliter
             }
             return ret;
         }
-        static int ParseNybble(char c)
+        private static int ParseNybble(char c)
         {
             if (c >= '0' && c <= '9')
             {
