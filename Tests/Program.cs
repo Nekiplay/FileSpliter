@@ -11,26 +11,60 @@ namespace Tests
     {
         static void Main(string[] args)
         {
-            FileSpliter.FileSpliter spliter = new FileSpliter.FileSpliter(splits: 8);
-            FileInfo file = new FileInfo(@"E:\Minecraft\AC Bypass [1.17.1]\plugins\Vulcan 2.6.5.jar");
-            DirectoryInfo directory = new DirectoryInfo(file.Name + "1");
-            if (!directory.Exists)
-            {
-                Directory.CreateDirectory(file.Name + "1");
-            }
-            string hex_split = spliter.Split(file, directory);
+            Console.WriteLine("Actions:");
+            Console.WriteLine("1 - Split");
+            Console.WriteLine("2 - UnSplit");
+            Console.Write("Select action: ");
+            string answer = Console.ReadLine();
 
-
-            string hex_unsplit = spliter.UnSplit(directory, "Vulcan 2.6.5.jar", true);
-            if (hex_split == hex_unsplit)
+            if (answer.Contains("1"))
             {
-                Console.WriteLine("Мы равны");
+                Console.Write("File path: ");
+                string filepath = Console.ReadLine();
+                filepath = filepath.Replace("\"", "");
+                FileInfo file = new FileInfo(filepath);
+                if (file.Exists)
+                {
+                    Console.Write("Splits (int): ");
+                    int splits = 2;
+                    int.TryParse(Console.ReadLine(), out splits);
+                    FileSpliter.FileSpliter spliter = new FileSpliter.FileSpliter(splits);
+                    DirectoryInfo directory = new DirectoryInfo(file.Name);
+                    if (directory.Exists)
+                    {
+                        Directory.Delete(file.Name, true);
+                    }
+                    Directory.CreateDirectory(file.Name);
+                    string hex = spliter.Split(file, directory);
+                    Console.WriteLine("Success " + file.Name + " splited");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("File not found");
+                }
             }
-            else
+            else if (answer.Contains("2"))
             {
-                Console.WriteLine("Мы не равны");
+                Console.Write("Directory path: ");
+                string directory = Console.ReadLine();
+                directory = directory.Replace("\"", "");
+                DirectoryInfo directoryInfo = new DirectoryInfo(directory);
+                if (directoryInfo.Exists)
+                {
+                    FileSpliter.FileSpliter spliter = new FileSpliter.FileSpliter(40);
+                    Console.Write("Save path: ");
+                    string savePath = Console.ReadLine();
+                    savePath = savePath.Replace("\"", "");
+                    string hex = spliter.UnSplit(directoryInfo, savePath);
+                    Console.WriteLine("Success un splited");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Directory not found");
+                }
             }
-            Console.ReadKey();
         }
     }
 }

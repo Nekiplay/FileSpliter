@@ -20,7 +20,6 @@ namespace FileSpliter
             int needFiles = splits;
             string hex = HexUtils.ByteArrayToString(File.ReadAllBytes(fileInfo.FullName));
             List<string> hexSplited = Split(hex, hex.Length / needFiles).ToList();
-            Console.WriteLine(hexSplited.Count);
             List<string> names = new List<string>();
             for (int i = 0; i < hexSplited.Count; i++)
             {
@@ -48,7 +47,6 @@ namespace FileSpliter
             s.Sort();
             foreach (string file in s)
             {
-                Console.WriteLine(file);
                 hex += File.ReadAllText(file);
                 if (remove) try { File.Delete(file); } catch { }
             }
