@@ -11,13 +11,14 @@ namespace Tests
     {
         static void Main(string[] args)
         {
+            Console.Title = "File Spliter";
             Console.WriteLine("Actions:");
             Console.WriteLine("1 - Split");
             Console.WriteLine("2 - UnSplit");
             Console.Write("Select action: ");
             string answer = Console.ReadLine();
 
-            if (answer.Contains("1"))
+            if (answer == "1")
             {
                 Console.Write("File path: ");
                 string filepath = Console.ReadLine();
@@ -44,7 +45,7 @@ namespace Tests
                     Console.WriteLine("File not found");
                 }
             }
-            else if (answer.Contains("2"))
+            else if (answer == "2")
             {
                 Console.Write("Directory path: ");
                 string directory = Console.ReadLine();
