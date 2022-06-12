@@ -19,6 +19,11 @@ namespace FileSpliter
         {
             int needFiles = splits;
             string hex = HexUtils.ByteArrayToString(File.ReadAllBytes(fileInfo.FullName));
+            Console.WriteLine(hex.Length + " & " + fileInfo.Length);
+            if (hex.Length < splits)
+            {
+                needFiles = hex.Length;
+            }
             List<string> hexSplited = Split(hex, hex.Length / needFiles).ToList();
             List<string> names = new List<string>();
             for (int i = 0; i < hexSplited.Count; i++)
